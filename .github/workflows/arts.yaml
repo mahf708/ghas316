@@ -26,16 +26,11 @@ jobs:
 
     - name: Create draft release
       id: create_release
-      uses: actions/create-release@v1
+      uses: elgohr/Github-Release-Action@v4
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body: |
-          DRAFT
-        draft: true
-        prerelease: true
+        title: MyReleaseMessage
 
     - name: Upload TAR.GZ release asset
       id: upload-tar-gz-release-asset
