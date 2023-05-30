@@ -1,4 +1,4 @@
-name: Main
+name: GHAS
 
 on: push
 
@@ -10,13 +10,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Build
-        run: echo ${{ github.sha }} > ${{ github.sha }}.txt
-      - name: tar
-        run: tar -cvf ${{ github.sha }}.tar .
-      - name: Test
-        run: cat ${{ github.sha }}.txt
-      - name: Release
+      - name: SHA
+        run: echo "SHA8=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
+      - name: TAR
+        run: tar -cvf ${{ SHA8 }}.tar .
+      - name: GHA
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
