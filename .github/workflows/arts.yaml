@@ -8,12 +8,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+          with:
+            submodules: recursive
       - name: Build
-        run: echo ${{ github.sha }} > Release.txt
+        run: echo ${{ github.sha }} > ${{ github.sha }}.txt
+      - name: tar
+        run: tar -cvf ${{ github.sha }}.tar ${{ github.sha }}.txt
       - name: Test
-        run: cat Release.txt
+        run: cat ${{ github.sha }}.txt
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: Release.txt
+          files: |
+            *.tar
