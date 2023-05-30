@@ -24,11 +24,9 @@ jobs:
         name: my-artifact
         path: path/to/artifact/world.txt
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
+    - name: Test
+      run: cat path/to/artifact/world.txt
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
-        files: |
-          path/to/artifact/world.txt
+        files: path/to/artifact/world.txt
