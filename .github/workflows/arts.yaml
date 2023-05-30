@@ -13,7 +13,7 @@ jobs:
       - name: Build
         run: echo ${{ github.sha }} > ${{ github.sha }}.txt
       - name: tar
-        run: tar -cvf ${{ github.sha }}.tar ${{ github.sha }}.txt
+        run: tar -cvf ${{ github.sha }}.tar .
       - name: Test
         run: cat ${{ github.sha }}.txt
       - name: Release
