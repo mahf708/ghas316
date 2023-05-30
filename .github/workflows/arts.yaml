@@ -11,11 +11,11 @@ jobs:
         with:
           submodules: recursive
       - name: SHA
-        run: echo "SHA8=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
+        run: echo "SHA7=echo $(cd e3sm; git log --oneline  | head -n1 | cut -c1-7)" >> $GITHUB_ENV
       - name: TAR
         run: |
-          touch ${SHA8}-full.tar.gz
-          tar --exclude=${SHA8}-full.tar.gz -zcvf ${SHA8}-full.tar.gz .
+          touch ${SHA7}-full.tar.gz
+          tar --exclude=${SHA7}-full.tar.gz -zcvf ${SHA7}-full.tar.gz .
       - name: GHA
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
